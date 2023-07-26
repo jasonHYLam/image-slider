@@ -1,11 +1,20 @@
+body {
+}
 .picture-frame {
+    margin: auto;
     border: 1px solid pink;
+    position: relative;
+    width: 333px;
 }
 
 .wide-div {
     width: 1000px;
     border: solid 1px black;
     display: flex;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+
 }
 
 .slide {
