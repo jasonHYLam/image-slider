@@ -22,3 +22,14 @@ body {
     border: solid 1px black;
     height: 200px;
 }
+
+.slide1 {
+    background-color: red;
+}
+
+.slide2 {
+    background-color: blue;
+}
+.slide3 {
+    background-color: yellow;
+}

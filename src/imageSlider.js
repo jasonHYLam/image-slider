@@ -18,4 +18,34 @@ export default function createImageSlider() {
     }
 
     createSlideContainer();
+
+    function getSlideContainer() {
+        return document.querySelector('.wide-div');
+    }
+
+    function getMoveRight() {
+        return document.querySelector('.move-right');
+    }
+
+    function getMoveLeft() {
+        return document.querySelector('.move-left');
+    }
+
+    function moveLeft() {
+        const firstSlide = getSlideContainer().firstChild;
+        getSlideContainer().removeChild(firstSlide);
+        getSlideContainer().appendChild(firstSlide);
+    }
+
+    function moveRight() {
+        const firstSlide = getSlideContainer().firstChild;
+        const lastSlide = getSlideContainer().lastChild;
+        getSlideContainer().removeChild(lastSlide);
+        getSlideContainer().insertBefore(lastSlide, firstSlide);
+    }
+
+    
+    getMoveRight().addEventListener('click', moveRight);
+    getMoveLeft().addEventListener('click', moveLeft);
+    // moveRight();
 }
