@@ -1,0 +1,15 @@
+.picture-frame {
+    border: 1px solid pink;
+}
+
+.wide-div {
+    width: 1000px;
+    border: solid 1px black;
+    display: flex;
+}
+
+.slide {
+    flex: 1;
+    border: solid 1px black;
+    height: 200px;
+}
