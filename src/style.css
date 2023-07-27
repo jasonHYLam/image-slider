@@ -13,19 +13,24 @@ body {
     border: solid 1px black;
     display: flex;
     position: relative;
-    left: 50%;
-    transform: translate(-50%);
+    /* left: 50%;
+    transform: translate(-50%); */
 }
 
-.wide-div.move-right {
+.wide-div.move-center {
+    left: 50%;
+    transform: translate(-50%);
+    transition: 1s;
+}
+
+.wide-div.start-right {
     left: 0;
     transform: translate(0%);
 }
 
-.wide-div.move-left{
-    left: 0%;
-    transform: translate(0%);
-    float: right;
+.wide-div.start-left{
+    left: 100%;
+    transform: translate(-100%);
 }
 
 .slide {

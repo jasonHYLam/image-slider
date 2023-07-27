@@ -11,7 +11,7 @@ export default function createImageSlider() {
     function createSlideContainer() {
         const body = document.querySelector('body');
         const pictureFrame = createElement('div', '', body, 'picture-frame');
-        const wideDiv = createElement('div', '', pictureFrame, 'wide-div');
+        const wideDiv = createElement('div', '', pictureFrame, 'wide-div', 'center');
 
         const slide1 = createElement('div', 'slide 1', wideDiv, 'slide', 'slide1');
         const slide2 = createElement('div', 'slide 2', wideDiv, 'slide', 'slide2');
@@ -45,6 +45,10 @@ export default function createImageSlider() {
             removeExistingClass(getSlideContainer(), 'move-right')
         }
 
+        if (checkExistingClass(getSlideContainer(), 'move-center')) {
+            removeExistingClass(getSlideContainer(), 'move-right')
+        }
+
         getSlideContainer().classList.add('move-left');
     }
 
@@ -54,6 +58,10 @@ export default function createImageSlider() {
         }
 
         getSlideContainer().classList.add('move-right');
+    }
+
+    function containerMoveCenter() {
+
     }
 
     function moveLeft() {
@@ -72,6 +80,12 @@ export default function createImageSlider() {
     
     // getMoveRight().addEventListener('click', moveRight);
     // getMoveLeft().addEventListener('click', moveLeft);
-    getMoveRight().addEventListener('click', containerMoveRight);
-    getMoveLeft().addEventListener('click', containerMoveLeft);
+    getMoveRight().addEventListener('click', ()=> {
+        containerMoveRight();
+        moveRight();
+    });
+    getMoveLeft().addEventListener('click', ()=>{
+        containerMoveLeft();
+        moveLeft();
+    });
 }
