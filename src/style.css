@@ -20,17 +20,19 @@ body {
 .wide-div.move-center {
     left: 50%;
     transform: translate(-50%);
-    transition: 1s;
+    transition: 2s;
 }
 
 .wide-div.start-right {
     left: 0;
     transform: translate(0%);
+    /* transition: 2s; */
 }
 
 .wide-div.start-left{
     left: 100%;
     transform: translate(-100%);
+    /* transition: 2s; */
 }
 
 .slide {

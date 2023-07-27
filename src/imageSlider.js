@@ -11,7 +11,7 @@ export default function createImageSlider() {
     function createSlideContainer() {
         const body = document.querySelector('body');
         const pictureFrame = createElement('div', '', body, 'picture-frame');
-        const wideDiv = createElement('div', '', pictureFrame, 'wide-div', 'center');
+        const wideDiv = createElement('div', '', pictureFrame, 'wide-div', 'move-center');
 
         const slide1 = createElement('div', 'slide 1', wideDiv, 'slide', 'slide1');
         const slide2 = createElement('div', 'slide 2', wideDiv, 'slide', 'slide2');
@@ -40,28 +40,39 @@ export default function createImageSlider() {
         el.classList.remove(className)
     }
 
-    function containerMoveLeft() {
-        if (checkExistingClass(getSlideContainer(), 'move-right')) {
-            removeExistingClass(getSlideContainer(), 'move-right')
+    function containerStartLeft() {
+        if (checkExistingClass(getSlideContainer(), 'start-right')) {
+            removeExistingClass(getSlideContainer(), 'start-right')
         }
 
         if (checkExistingClass(getSlideContainer(), 'move-center')) {
-            removeExistingClass(getSlideContainer(), 'move-right')
+            removeExistingClass(getSlideContainer(), 'move-center')
         }
 
-        getSlideContainer().classList.add('move-left');
+        getSlideContainer().classList.add('start-left');
     }
 
-    function containerMoveRight() {
-        if (checkExistingClass(getSlideContainer(), 'move-left')) {
-            removeExistingClass(getSlideContainer(), 'move-left')
+    function containerStartRight() {
+        if (checkExistingClass(getSlideContainer(), 'start-left')) {
+            removeExistingClass(getSlideContainer(), 'start-left')
         }
 
-        getSlideContainer().classList.add('move-right');
+        if (checkExistingClass(getSlideContainer(), 'move-center')) {
+            removeExistingClass(getSlideContainer(), 'move-center')
+        }
+
+        getSlideContainer().classList.add('start-right');
     }
 
     function containerMoveCenter() {
+        if (checkExistingClass(getSlideContainer(), 'start-right')) {
+            removeExistingClass(getSlideContainer(), 'start-right')
+        }
 
+        if (checkExistingClass(getSlideContainer(), 'start-left')) {
+            removeExistingClass(getSlideContainer(), 'start-left')
+        }
+        getSlideContainer().classList.add('move-center');
     }
 
     function moveLeft() {
@@ -76,16 +87,15 @@ export default function createImageSlider() {
         getSlideContainer().removeChild(lastSlide);
         getSlideContainer().insertBefore(lastSlide, firstSlide);
     }
-
     
-    // getMoveRight().addEventListener('click', moveRight);
-    // getMoveLeft().addEventListener('click', moveLeft);
     getMoveRight().addEventListener('click', ()=> {
-        containerMoveRight();
-        moveRight();
+        // moveRight();
+        containerStartRight();
+        setTimeout(containerMoveCenter, 1)
     });
     getMoveLeft().addEventListener('click', ()=>{
-        containerMoveLeft();
-        moveLeft();
+        // moveLeft();
+        containerStartLeft();
+        setTimeout(containerMoveCenter, 1)
     });
 }
