@@ -1,5 +1,11 @@
 body {
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .picture-frame {
     margin: auto;
     border: 1px solid pink;
@@ -46,4 +52,16 @@ body {
 }
 .slide3 {
     background-color: yellow;
+}
+
+.nav-container {
+    display: flex;
+}
+
+.nav-circle {
+    height: 10px;
+    width: 10px;
+    border: solid 1px black;
+    border-radius: 50%;
+
 }

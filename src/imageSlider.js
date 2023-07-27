@@ -19,9 +19,9 @@ export default function createImageSlider() {
         const slide3 = createElement('div', 'slide 3', wideDiv, 'slide', 'slide3');
 
         const navContainer = createElement('div', '', container, 'nav-container');
-        createElement('div', '', navContainer, 'nav-circle');
-        createElement('div', '', navContainer, 'nav-circle');
-        createElement('div', '', navContainer, 'nav-circle');
+        createElement('div', '', navContainer, 'nav-circle', 'nav-1');
+        createElement('div', '', navContainer, 'nav-circle', 'nav-2');
+        createElement('div', '', navContainer, 'nav-circle', 'nav-3');
     }
 
     createSlideContainer();
