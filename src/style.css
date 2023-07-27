@@ -5,7 +5,7 @@ body {
     border: 1px solid pink;
     position: relative;
     width: 333px;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .wide-div {
@@ -13,8 +13,6 @@ body {
     border: solid 1px black;
     display: flex;
     position: relative;
-    /* left: 50%;
-    transform: translate(-50%); */
 }
 
 .wide-div.move-center {
@@ -23,16 +21,14 @@ body {
     transition: 2s;
 }
 
-.wide-div.start-right {
+.wide-div.start-left {
     left: 0;
     transform: translate(0%);
-    /* transition: 2s; */
 }
 
-.wide-div.start-left{
+.wide-div.start-right {
     left: 100%;
     transform: translate(-100%);
-    /* transition: 2s; */
 }
 
 .slide {
