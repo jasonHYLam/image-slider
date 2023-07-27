@@ -1,5 +1,3 @@
-import { doc } from "prettier";
-
 export default function createImageSlider() {
 
     function createElement(elType, textContent, parentElement, ...classes) {
@@ -26,10 +24,8 @@ export default function createImageSlider() {
         const navContainer = createElement('div', '', container, 'nav-container');
         const nav1 = createElement('div', '', navContainer, 'nav-circle', 'nav-1');
         nav1.setAttribute('data-index', 1);
-
         const nav2 = createElement('div', '', navContainer, 'nav-circle', 'nav-2');
         nav2.setAttribute('data-index', 2);
-
         const nav3 = createElement('div', '', navContainer, 'nav-circle', 'nav-3');
         nav3.setAttribute('data-index', 3);
 
@@ -91,19 +87,76 @@ export default function createImageSlider() {
         getSlideContainer().removeChild(lastSlide);
         getSlideContainer().insertBefore(lastSlide, firstSlide);
     }
+
+    function getCurrentSlide() {
+        return getSlideContainer().childNodes[1];
+    }
+
+    function moveToSpecificSlide(index) {
+        const currentSlideIndex = getCurrentSlide().dataset.index;
+        console.log('prev index')
+        console.log(currentSlideIndex);
+        console.log('next index');
+        console.log(index);
+        let slidesToMove = Math.abs(currentSlideIndex - index);
+        // if slide is in central position, don't change anything
+        if (index == currentSlideIndex) {}
+
+        else if (currentSlideIndex < index) {
+            for (let i = 0; i < slidesToMove; i++) {
+                moveLeft();
+                containerStartLeft();
+            }
+        }
+        else if (currentSlideIndex > index) {
+            for (let i = 0; i < slidesToMove; i++) {
+                moveRight();
+                containerStartRight();
+            }
+        }
+        setTimeout(containerMoveCenter, 1)
+    }
     
     getMoveRight().addEventListener('click', ()=> {
         moveRight();
         containerStartRight();
         setTimeout(containerMoveCenter, 1)
+        getCurrentSlide();
     });
+
     getMoveLeft().addEventListener('click', ()=>{
         moveLeft();
         containerStartLeft();
         setTimeout(containerMoveCenter, 1)
+        getCurrentSlide();
     });
 
     function getNavCircles() {
-        return document.querySelectorAll('nav-circle');
+        return document.querySelectorAll('.nav-circle');
     }
+
+    function removeClickedDecorationFromAll() {
+        getNavCircles().forEach((navCircle) => {
+            navCircle.classList.remove('clicked');
+        })
+    }
+    function addClickedDecoration(el) {
+        el.classList.add('clicked')
+    }
+
+    function getSlideByIndex(index) {
+        // get slide by index
+        const matchingSlide = [...getSlideContainer().childNodes].find(
+            (slide) => slide.dataset.index == index
+            )
+        console.log(matchingSlide)
+    }
+
+    getNavCircles().forEach((navCircle) => {
+        navCircle.addEventListener('click', (e) => {
+            removeClickedDecorationFromAll();
+            addClickedDecoration(e.target);
+            moveToSpecificSlide(navCircle.dataset.index);
+        })
+    })
 }
