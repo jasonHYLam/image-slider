@@ -144,14 +144,6 @@ export default function createImageSlider() {
         el.classList.add('clicked')
     }
 
-    function getSlideByIndex(index) {
-        // get slide by index
-        const matchingSlide = [...getSlideContainer().childNodes].find(
-            (slide) => slide.dataset.index == index
-            )
-        console.log(matchingSlide)
-    }
-
     getNavCircles().forEach((navCircle) => {
         navCircle.addEventListener('click', (e) => {
             removeClickedDecorationFromAll();
@@ -159,4 +151,10 @@ export default function createImageSlider() {
             moveToSpecificSlide(navCircle.dataset.index);
         })
     })
+
+    setInterval(() => {
+        moveLeft();
+        containerStartLeft();
+        setTimeout(containerMoveCenter, 1);
+    }, 5001);
 }
