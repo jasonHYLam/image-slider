@@ -1,3 +1,5 @@
+import { doc } from "prettier";
+
 export default function createImageSlider() {
 
     function createElement(elType, textContent, parentElement, ...classes) {
@@ -15,13 +17,22 @@ export default function createImageSlider() {
         const wideDiv = createElement('div', '', pictureFrame, 'wide-div', 'move-center');
 
         const slide1 = createElement('div', 'slide 1', wideDiv, 'slide', 'slide1');
+        slide1.setAttribute('data-index', 1)
         const slide2 = createElement('div', 'slide 2', wideDiv, 'slide', 'slide2');
+        slide2.setAttribute('data-index', 2)
         const slide3 = createElement('div', 'slide 3', wideDiv, 'slide', 'slide3');
+        slide3.setAttribute('data-index', 3)
 
         const navContainer = createElement('div', '', container, 'nav-container');
-        createElement('div', '', navContainer, 'nav-circle', 'nav-1');
-        createElement('div', '', navContainer, 'nav-circle', 'nav-2');
-        createElement('div', '', navContainer, 'nav-circle', 'nav-3');
+        const nav1 = createElement('div', '', navContainer, 'nav-circle', 'nav-1');
+        nav1.setAttribute('data-index', 1);
+
+        const nav2 = createElement('div', '', navContainer, 'nav-circle', 'nav-2');
+        nav2.setAttribute('data-index', 2);
+
+        const nav3 = createElement('div', '', navContainer, 'nav-circle', 'nav-3');
+        nav3.setAttribute('data-index', 3);
+
     }
 
     createSlideContainer();
@@ -91,4 +102,8 @@ export default function createImageSlider() {
         containerStartLeft();
         setTimeout(containerMoveCenter, 1)
     });
+
+    function getNavCircles() {
+        return document.querySelectorAll('nav-circle');
+    }
 }
