@@ -55,7 +55,9 @@ body {
 }
 
 .nav-container {
+    margin-top: 10px;
     display: flex;
+    gap: 10px;
 }
 
 .nav-circle {
@@ -63,5 +65,6 @@ body {
     width: 10px;
     border: solid 1px black;
     border-radius: 50%;
+    cursor: pointer;
 
 }
