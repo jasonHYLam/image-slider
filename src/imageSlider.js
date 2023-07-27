@@ -75,17 +75,29 @@ export default function createImageSlider() {
         getSlideContainer().classList.add('move-center');
     }
 
-    function moveLeft() {
+    function shiftSlidesLeft() {
         const firstSlide = getSlideContainer().firstChild;
         getSlideContainer().removeChild(firstSlide);
         getSlideContainer().appendChild(firstSlide);
     }
 
-    function moveRight() {
+    function shiftSlidesRight() {
         const firstSlide = getSlideContainer().firstChild;
         const lastSlide = getSlideContainer().lastChild;
         getSlideContainer().removeChild(lastSlide);
         getSlideContainer().insertBefore(lastSlide, firstSlide);
+    }
+
+    function slideSlidesLeft() {
+        shiftSlidesLeft();
+        containerStartLeft();
+        setTimeout(containerMoveCenter, 1)
+    }
+
+    function slideSlidesRight() {
+        shiftSlidesRight();
+        containerStartRight();
+        setTimeout(containerMoveCenter, 1)
     }
 
     function getCurrentSlide() {
@@ -94,41 +106,34 @@ export default function createImageSlider() {
 
     function moveToSpecificSlide(index) {
         const currentSlideIndex = getCurrentSlide().dataset.index;
-        console.log('prev index')
-        console.log(currentSlideIndex);
-        console.log('next index');
-        console.log(index);
         let slidesToMove = Math.abs(currentSlideIndex - index);
         // if slide is in central position, don't change anything
         if (index == currentSlideIndex) {}
 
         else if (currentSlideIndex < index) {
             for (let i = 0; i < slidesToMove; i++) {
-                moveLeft();
+                shiftSlidesLeft();
                 containerStartLeft();
             }
         }
         else if (currentSlideIndex > index) {
             for (let i = 0; i < slidesToMove; i++) {
-                moveRight();
+                shiftSlidesRight();
                 containerStartRight();
             }
         }
         setTimeout(containerMoveCenter, 1)
+        setLoopingAnimation();
     }
     
     getMoveRight().addEventListener('click', ()=> {
-        moveRight();
-        containerStartRight();
-        setTimeout(containerMoveCenter, 1)
-        getCurrentSlide();
+        slideSlidesRight();
+        setLoopingAnimation();
     });
 
     getMoveLeft().addEventListener('click', ()=>{
-        moveLeft();
-        containerStartLeft();
-        setTimeout(containerMoveCenter, 1)
-        getCurrentSlide();
+        slideSlidesLeft();
+        setLoopingAnimation();
     });
 
     function getNavCircles() {
@@ -152,9 +157,15 @@ export default function createImageSlider() {
         })
     })
 
-    setInterval(() => {
-        moveLeft();
-        containerStartLeft();
-        setTimeout(containerMoveCenter, 1);
-    }, 5001);
+    let myTimer = setInterval(slideSlidesRight, 5001);
+
+    function setLoopingAnimation() {
+        clearInterval(myTimer);
+        myTimer = setInterval(slideSlidesRight, 5001);
+
+        
+    }
+
+    setLoopingAnimation();
+
 }
