@@ -11,8 +11,11 @@ export default function createImageSlider() {
     function createSlideContainer() {
         const body = document.querySelector('body');
         const container = createElement('div', '', body, 'container') 
-        const pictureFrame = createElement('div', '', container, 'picture-frame');
+        const containerTop = createElement('div', '', container, 'container-top') 
+        const leftButton = createElement('div', 'Previous Slide', containerTop, 'move-left-button');
+        const pictureFrame = createElement('div', '', containerTop, 'picture-frame');
         const wideDiv = createElement('div', '', pictureFrame, 'wide-div', 'move-center');
+        const rightButton = createElement('div', 'Next Slide', containerTop, 'move-right-button');
 
         const slide1 = createElement('div', 'slide 1', wideDiv, 'slide', 'slide1');
         slide1.setAttribute('data-index', 1)
@@ -37,12 +40,12 @@ export default function createImageSlider() {
         return document.querySelector('.wide-div');
     }
 
-    function getMoveRight() {
-        return document.querySelector('.move-right');
+    function getNextSlide() {
+        return document.querySelector('.move-right-button');
     }
 
-    function getMoveLeft() {
-        return document.querySelector('.move-left');
+    function getPreviousSlide() {
+        return document.querySelector('.move-left-button');
     }
 
     function checkExistingClass(el, className) {
@@ -88,7 +91,7 @@ export default function createImageSlider() {
         getSlideContainer().insertBefore(lastSlide, firstSlide);
     }
 
-    function slideSlidesLeft() {
+    function slideSlidesLeft() { // by sliding slide to left, effectively get next slide.
         shiftSlidesLeft();
         containerStartLeft();
         setTimeout(containerMoveCenter, 1)
@@ -96,7 +99,7 @@ export default function createImageSlider() {
         setDecoratedCircleForSpecificSlide();
     }
 
-    function slideSlidesRight() {
+    function slideSlidesRight() { // by sliding slide to right, effectively get previous slide.
         shiftSlidesRight();
         containerStartRight();
         setTimeout(containerMoveCenter, 1);
@@ -129,13 +132,13 @@ export default function createImageSlider() {
         setLoopingAnimation();
     }
     
-    getMoveRight().addEventListener('click', ()=> {
-        slideSlidesRight();
+    getNextSlide().addEventListener('click', ()=> {
+        slideSlidesLeft();
         setLoopingAnimation();
     });
 
-    getMoveLeft().addEventListener('click', ()=>{
-        slideSlidesLeft();
+    getPreviousSlide().addEventListener('click', ()=>{
+        slideSlidesRight();
         setLoopingAnimation();
     });
 
@@ -176,10 +179,9 @@ export default function createImageSlider() {
     function setLoopingAnimation() {
         clearInterval(myTimer);
         myTimer = setInterval(slideSlidesRight, 5001);
-
-        
     }
 
     setLoopingAnimation();
+    setDecoratedCircleForSpecificSlide();
 
 }

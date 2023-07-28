@@ -1,11 +1,24 @@
 body {
 }
 
+.container-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.move-left-button, .move-right-button {
+    cursor: pointer;
+    background-color: aliceblue;
+    padding: 10px 10px 10px;
+    border: 1px solid black;
+}
+
 .picture-frame {
     margin: auto;
     border: 1px solid pink;
