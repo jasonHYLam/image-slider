@@ -92,12 +92,15 @@ export default function createImageSlider() {
         shiftSlidesLeft();
         containerStartLeft();
         setTimeout(containerMoveCenter, 1)
+        removeClickedDecorationFromAll();
+        setDecoratedCircleForSpecificSlide();
     }
 
     function slideSlidesRight() {
         shiftSlidesRight();
         containerStartRight();
-        setTimeout(containerMoveCenter, 1)
+        setTimeout(containerMoveCenter, 1);
+        setDecoratedCircleForSpecificSlide();
     }
 
     function getCurrentSlide() {
@@ -147,6 +150,17 @@ export default function createImageSlider() {
     }
     function addClickedDecoration(el) {
         el.classList.add('clicked')
+    }
+
+    function setDecoratedCircleForSpecificSlide() {
+        removeClickedDecorationFromAll();
+        console.log()
+        for (let i = 0; i < getNavCircles().length; i++) {
+            const currentNav = getNavCircles()[i];
+            if (currentNav.dataset.index == getCurrentSlide().dataset.index) {
+                addClickedDecoration(getNavCircles()[i]);
+            }
+        }
     }
 
     getNavCircles().forEach((navCircle) => {
